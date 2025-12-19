@@ -132,7 +132,36 @@ const Upload: React.FC<UploadProps> = ({ onUploadSuccess }) => {
             <p className="font-bold">✨ Now with AI Categorization</p>
             <p>Your data is processed locally. For uncategorized items, we securely use the Gemini API to suggest a category, ensuring your privacy is respected.</p>
         </div>
-        
+
+        {!categorizedTransactions.length && (
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h2 className="text-lg font-semibold mb-3 flex items-center">
+                    <Icon name="question" className="w-5 h-5 mr-2 text-blue-500" />
+                    CSV Format Requirements
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                    To ensure your data is imported correctly, your CSV file should include a header row with the following columns (case-insensitive):
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div className="border rounded p-3 bg-gray-50">
+                        <p className="font-bold text-gray-700 mb-1">📅 Date</p>
+                        <p className="text-gray-600">Column name must contain: <code className="bg-gray-200 px-1 rounded text-xs">date</code></p>
+                    </div>
+                    <div className="border rounded p-3 bg-gray-50">
+                        <p className="font-bold text-gray-700 mb-1">📝 Description</p>
+                        <p className="text-gray-600">Use one of: <code className="bg-gray-200 px-1 rounded text-xs">description</code>, <code className="bg-gray-200 px-1 rounded text-xs">narrative</code>, <code className="bg-gray-200 px-1 rounded text-xs">memo</code>, or <code className="bg-gray-200 px-1 rounded text-xs">payee</code></p>
+                    </div>
+                    <div className="border rounded p-3 bg-gray-50">
+                        <p className="font-bold text-gray-700 mb-1">💰 Amount</p>
+                        <p className="text-gray-600">Either an <code className="bg-gray-200 px-1 rounded text-xs">amount</code> column, or both <code className="bg-gray-200 px-1 rounded text-xs">credit</code> and <code className="bg-gray-200 px-1 rounded text-xs">debit</code></p>
+                    </div>
+                </div>
+                <p className="text-xs text-gray-500 mt-4">
+                    * Negative amounts are treated as expenses, positive as income. For Credit/Debit columns, amount is calculated as Credit minus Debit.
+                </p>
+            </div>
+        )}
+
         {!categorizedTransactions.length && (
             <div className="max-w-xl mx-auto space-y-3">
                 <div className="flex items-center space-x-2">
