@@ -1,0 +1,5 @@
+{
+  "name": "Local Finance Insights",
+  "description": "A privacy-first web application to provide insights into your financial transactions. All data is processed and stored locally in your browser.",
+  "requestFramePermissions": []
+}
